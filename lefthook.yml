@@ -1,0 +1,18 @@
+min_version: 2.1.6
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: shellcheck
+      glob: "*.sh"
+      run: npx shellcheck '{staged_files}'
+    - name: prettier
+      run: npx prettier --write {staged_files}
+      glob: "*.{js,json,md,yml,yaml,sh}"
+    - name: gitleaks
+      run: gitleaks git --pre-commit --staged
+
+commit-msg:
+  commands:
+    commitlint:
+      run: commitlint --edit {1}

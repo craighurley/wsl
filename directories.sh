@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Start
-echo "$(basename "$0") starting."
+SCRIPT_NAME="$(basename "$0")"
+
+echo "${SCRIPT_NAME} starting."
 
 # ssh
 [[ ! -d ~/.ssh ]] && mkdir -p ~/.ssh && chmod 700 ~/.ssh
@@ -14,5 +15,4 @@ echo "$(basename "$0") starting."
 [[ ! -d ~/node_modules/.bin ]] && mkdir -p ~/node_modules/.bin
 [[ ! -d ~/tmp ]] && mkdir -p ~/tmp
 
-# Finished
-echo "$(basename "$0") complete."
+echo "${SCRIPT_NAME} complete."

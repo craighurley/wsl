@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Start
-echo "$(basename "$0") starting."
+SCRIPT_NAME="$(basename "$0")"
+
+echo "${SCRIPT_NAME} starting."
 
 # Ask for the administrator password upfront
 sudo -v
@@ -51,5 +52,4 @@ rm terraform.zip
 #
 chsh -s "$(which zsh)"
 
-# Finished
-echo "$(basename "$0") complete."
+echo "${SCRIPT_NAME} complete."

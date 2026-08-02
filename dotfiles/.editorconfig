@@ -1,0 +1,37 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.erb]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.{yaml,yml,yaml.j2}]
+indent_size = 2
+
+[*.{js,json,json.j2,template,code-snippets}]
+indent_size = 2
+
+[{*.rb,Vagrantfile}]
+indent_size = 2
+
+[*.ino]
+indent_size = 4
+
+[*.tf]
+indent_size = 2
+
+[*.md]
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+
+[*.go]
+indent_style = tab

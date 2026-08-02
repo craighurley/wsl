@@ -1,0 +1,40 @@
+#
+# general
+#
+alias ..="cd .."
+alias c="clear"
+alias e="exit"
+alias g="git"
+alias grep='command grep -I'
+if [[ $(echo $SHELL | grep zsh) ]] ; then
+    alias history="history -i"
+    alias h="history -i"
+elif [[ $(echo $SHELL | grep bash) ]] ; then
+    alias h="history"
+fi
+alias idle="python -m idlelib.idle"
+alias j="jobs"
+alias l="ls -lhF --color"
+alias lo="ls -lhF --group-directories-first --color"
+alias ll="ls -lhFA --color"
+alias llo="ls -lhFA --group-directories-first --color"
+alias ls="command ls -h --group-directories-first --color"
+alias lsof='command lsof -n -P'
+alias pstree='command pstree -g 3'
+alias tcpdump="command tcpdump -nn"
+alias v="vim"
+alias vi="vim"
+
+#
+# custom
+#
+alias me="curl ifconfig.co"
+
+#
+# docker
+#
+alias d='docker'
+alias docker-prune='docker system prune --volumes -f'
+alias docker-rm-all='docker rm $(docker ps -a -q)'
+alias docker-rmi-untagged='docker image prune -f'
+alias docker-stop-all='docker stop $(docker ps -a -q)'

@@ -1,0 +1,93 @@
+# Check if path is already in PATH, if not, add it to the start of PATH
+pathprepend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1${PATH:+":$PATH"}"
+    fi
+}
+
+# Check if path is already in PATH, if not, add it to the end of PATH
+pathappend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
+# # Decode base64
+# function decode() {
+#     echo "$1" | base64 --decode ; echo
+# }
+
+function backup() {
+    d=$(date +%Y%m%d-%s)
+    echo Backup projects
+    tar -zcf ~/backups/$HOSTNAME-projects-$d.tgz ~/projects
+}
+
+function man() {
+    env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+        man "$@"
+}
+
+function upgrade() {
+    YELLOW='\033[0;33m'
+    RESET='\033[0m'
+
+    # if [[ $(command -v uv pip) ]] ; then
+    #     echo -e "\n${YELLOW}>>> Upgrading uv pip...${RESET}"
+    #     uv pip install -U pip
+    #     uv pip list --outdated | awk 'NR>2' | cut -d' ' -f1 | xargs uv pip install --upgrade
+    # fi
+
+    if [[ $(command -v uv) ]] ; then
+        echo -e "\n${YELLOW}>>> Upgrading uv tools...${RESET}"
+        uv tool upgrade --all
+    fi
+
+    if [[ $(command -v npm) ]] ; then
+        echo -e "\n${YELLOW}>>> Upgrading npm...${RESET}"
+        npm update
+    fi
+
+    # if [[ $(command -v vim) ]] ; then
+    #     echo -e "\n${YELLOW}>>> Upgrading vim...${RESET}"
+    #     vim -c PluginUpdate -c quitall
+    # fi
+}
+
+function git-sync() {
+    ROOT_DIR="${1:-.}"
+
+    for dir in "$ROOT_DIR"/*/; do
+        [[ -d "$dir/.git" ]] || continue
+
+        repo="$(basename "$dir")"
+        echo "==> $repo"
+
+        if ! git -C "$dir" fetch 2>&1; then
+            echo "    fetch failed, skipping"
+            continue
+        fi
+
+        uncommitted=$(git -C "$dir" status --porcelain)
+        unpushed=$(git -C "$dir" log --oneline @{u}..HEAD 2>/dev/null || true)
+        incoming=$(git -C "$dir" log --oneline HEAD..@{u} 2>/dev/null || true)
+
+        if [[ -z "$incoming" ]]; then
+            echo "    up to date"
+        elif [[ -n "$uncommitted" ]]; then
+            echo "    skipping pull: uncommitted changes"
+        elif [[ -n "$unpushed" ]]; then
+            echo "    skipping pull: unpushed commits"
+        else
+            git -C "$dir" pull --quiet
+            echo "    pulled"
+        fi
+    done
+}

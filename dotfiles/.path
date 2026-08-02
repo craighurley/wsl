@@ -1,0 +1,16 @@
+# brew
+if [[ -d "/opt/homebrew/bin/" ]] ; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -d "/usr/local/bin/" ]] ; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# custom scripts and binaries
+pathprepend "$HOME/.local/bin"
+pathprepend "$HOME/node_modules/.bin"
+
+export PATH
+
+if [[ $(echo $SHELL | grep zsh) ]] ; then
+    typeset -U path
+fi

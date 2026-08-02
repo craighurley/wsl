@@ -1,0 +1,104 @@
+add_newline = true
+command_timeout = 1000
+
+format = """
+$hostname\
+$shell\
+$time\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$python\
+${custom.tfenv}\
+$aws\
+$directory\
+$line_break\
+$character"""
+
+[hostname]
+disabled = false
+trim_at = ''
+style = 'bold blue'
+format = '[$ssh_symbol$hostname]($style) [|](bright-black) '
+
+[shell]
+disabled = true
+bash_indicator = 'b'
+zsh_indicator = 'z'
+unknown_indicator = '?'
+style = 'cyan bold'
+format = '[$indicator]($style) [|](bright-black) '
+
+[time]
+disabled = true
+time_format = '%T'
+style = "bright-black"
+format = "[$time]($style) [|](bright-black) "
+
+[git_branch]
+symbol = ''
+ignore_branches = []
+style = 'green'
+format = '[$branch(:$remote_branch)]($style) '
+
+[git_commit]
+style = 'red'
+format = '[$hash$tag]($style)'
+
+[git_state]
+style = 'white'
+format = ' [$state( $progress_current/$progress_total)]($style)'
+
+[git_status]
+disabled = false
+conflicted = '[⚑](bold red)'
+deleted = 'x'
+modified = '*'
+up_to_date = '[=](white)'
+style = 'red'
+format = '[$all_status$ahead_behind]($style) [|](bright-black) '
+
+#[custom.pyenv]
+#command = "pyenv version-name"
+#when = 'test $(pyenv version-name) -a "$(pyenv version-name)" != "default"'
+#style = 'yellow'
+#format = '[$output]($style) [|](bright-black) '
+
+[python]
+#disabled = false
+style = 'yellow'
+detect_files = ['']
+detect_folders = ['']
+#format = '[($virtualenv)]($style) [|](bright-black) '
+format = '[(${version} )(\($virtualenv\))]($style) [|](bright-black) '
+
+[custom.tfenv]
+#disabled = true
+command = "tfenv version-name"
+detect_extensions = ['tf', 'tfplan', 'tfstate']
+detect_folders = ['.terraform']
+style = 'purple'
+format = '[$output]($style) [|](bright-black) '
+
+[aws]
+disabled = false
+symbol = ''
+style = 'red'
+format = '[($profile)( [${region}](dimmed))]($style) [|](bright-black) '
+
+[directory]
+disabled = false
+read_only = ' 🔒'
+truncation_length = 0
+truncation_symbol = ''
+truncate_to_repo = false
+style = 'white'
+format= '[$path]($style)[$read_only]($read_only_style)'
+
+[line_break]
+disabled = false
+
+[character]
+success_symbol = '[\$](white)'
+error_symbol = '[\$](bold red)'

@@ -1,0 +1,171 @@
+[core]
+    abbrev = 7
+    attributesfile = ~/.gitattributes
+    commitGraph = true
+    editor = vim
+    excludesfile = ~/.gitignore_global
+    pager = diffr | less -R
+    quotePath = false
+
+[interactive]
+    diffFilter = diffr
+
+# [user]
+# name and email should be set in ~/.gitconfig.custom
+
+[receive]
+    advertisePushOptions = true
+[gc]
+    writeCommitGraph = true
+
+[commit]
+    # template = ~/.gitmessage
+    gpgsign = false
+
+# [pager]
+#     log = diff-highlight | less -+S
+#     show = diff-highlight | less -+S
+#     diff = diff-highlight | less -+S
+
+[status]
+    showUntrackedFiles = all
+
+[color]
+    ui = auto
+
+[color "branch"]
+    current = red reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[push]
+    default = simple
+    followTags = true
+
+[pull]
+    rebase = false
+
+[apply]
+    whitespace = nowarn
+
+[mergetool "vimdiff"]
+    trustExitCode = false
+
+[difftool]
+    prompt = false
+
+[mergetool]
+    prompt = false
+
+[diff]
+    tool = vimdiff
+
+[merge]
+    log = true
+    tool = vimdiff
+
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
+[alias]
+    # logging
+    l = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad %Creset%s %C(blue)%an <%ae>\" --date=auto:local --no-merges -${1:-15}; }; f"
+    lm = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad %Creset%s %C(blue)%an\" --date=auto:local --merges -${1:-15}; }; f"
+    la = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an <%ae>\" --date=auto:local -${1:-15}; }; f"
+    lc = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad %C(blue)%an <%ae> %Creset%B\" --date=auto:local --no-merges -${1:-15}; }; f"
+    # show with pretty print
+    shop = "!f() { git show --pretty=format:\"%Cred%h %Cgreen%ad %Creset%s %C(blue)%an <%ae>\" --date=auto:local ${1}; }; f"
+    # diff
+    ld = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad %Creset%s %C(blue)%an <%ae>\" --date=auto:local --no-merges -p -${1:-15}; }; f"
+    # what files changed
+    lf = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an\" --date=auto:local --no-merges --decorate --numstat -${1:-15}; }; f"
+    # graph everything to the current commit
+    lg = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an\" --date=auto:local --graph -${1:-15}; }; f"
+    # graph across all branches to the most recent
+    lga = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an\" --date=auto:local --graph --all --topo-order -${1:-15}; }; f"
+    # focus log on specific user
+    lw = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an\" --date=auto:local --author=${1:-Craig}; }; f"
+    # search history for string
+    searchfor = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an <%ae>\" --date=auto:local -p --source --all -S ${1}; }; f"
+    searchforr = "!f() { git log --pretty=format:\"%Cred%h %Cgreen%ad%C(yellow)%d %Creset%s %C(blue)%an <%ae>\" --date=auto:local --reverse -p --source --all -S ${1}; }; f"
+    # short log (good for summarising changes)
+    sl = "!f() { git shortlog --no-merges -${1:-15}; }; f"
+    # reflog for current branch (useful for getting the parent commit)
+    rl = "!f() { git reflog show $(git rev-parse --abbrev-ref HEAD) --pretty=format:\"%Cred%h %Cgreen%cd%C(yellow)%d %Creset%gs\" --date=auto:local; }; f"
+    who = blame
+
+    # list all files
+    ls = ls-files
+
+    # show diff for given number of commits
+    d = "!f() { git diff --patch-with-stat HEAD~${1:-0}; }; f"
+    # show diff of staged items
+    ds = "!f() { git diff --staged; }; f"
+    # show all files that changed over the given number of commits
+    df = "!f() { git diff --stat HEAD~${1:-0}; }; f"
+    # show log and diff for given number of commits
+    dl = "!f() { git log -p --no-merges -${1:-1}; }; f"
+
+    # searching
+    g = grep -I
+    # search in file name
+    gf = ! git ls-files | grep
+    # search and replace using sed (macos)
+    sed = ! git grep -Izl '.' | xargs -0 sed -i '' -e
+
+    # View the current working tree status using the short format
+    s = status -s
+
+    # what tag(s) point at current commit
+    tagged = tag -l --points-at HEAD
+
+    # show verbose output about tags, branches or remotes
+    tags = tag -l
+    branches = branch -av
+    remotes = remote -v
+
+    f = fetch --all
+    p = pull
+    co = checkout
+    unstage = reset
+
+    # cleaning
+    clean-branches = "!f() { git branch | grep -vE '(master$|^\\*)' | xargs git branch -D ; git fetch -avp ; }; f"
+    cb = "!f() { git branch | grep -vE '(master$|^\\*)' | xargs git branch -D ; git fetch -avp ; }; f"
+
+    # diff/merge tool
+    dt = difftool
+    mt = mergetool
+
+    # conflicts/merges
+    # choose the change(s) from the local
+    ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+    # choose the change(s) from the remote
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+    # rebase
+    r = "!f() { git rebase -i HEAD~${1:-1}; }; f"
+
+    # committing
+    c = commit
+    cm = commit -m
+    cnm = commit -m 'no message'
+    yolo = "!f() { git add . && git commit -m 'no message' && git push; }; f"
+
+[include]
+    path = ~/.gitconfig.custom
+[init]
+    defaultBranch = master

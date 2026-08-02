@@ -9,8 +9,8 @@ set -euo pipefail
 SCRIPT_NAME="$(basename "$0")"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Source directory: sibling "dotfiles" dir next to the repo root, overridable.
-DOTFILES_DIR="${DOTFILES_DIR:-$(cd "${SCRIPT_DIR}/.." && pwd)/dotfiles}"
+# Source directory: "dotfiles" dir beside this script, overridable.
+DOTFILES_DIR="${DOTFILES_DIR:-${SCRIPT_DIR}/dotfiles}"
 BACKUP_DIR="${BACKUP_DIR:-${HOME}/backups/dotfiles}"
 
 # Single stamp for the whole run so one invocation is easy to identify.
@@ -41,7 +41,7 @@ while IFS= read -r -d '' src; do
         backed_up=$((backed_up + 1))
     fi
 
-    mkdir -p "$(dirname "${dest}")"q
+    mkdir -p "$(dirname "${dest}")"
     cp -p "${src}" "${dest}"
     log "installed ${rel}"
     copied=$((copied + 1))

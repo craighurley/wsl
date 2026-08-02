@@ -23,6 +23,17 @@ Run the following scripts:
 ~/wsl/dotfiles.sh
 ```
 
+### git committer
+
+You'll need to update your git committer details:
+
+```
+cp ~/.gitconfig.custom.example ~/.gitconfig.custom
+# now edit your name and email address in ~/.gitconfig.custom
+```
+
+### Timezone
+
 The default timezone is UTC, you may want to change that to your region:
 
 ```

@@ -6,10 +6,6 @@ echo "$(basename "$0") starting."
 # Ask for the administrator password upfront
 sudo -v
 
-#
-# Installs
-#
-
 # apt
 sudo apt update
 sudo apt upgrade -y
@@ -21,8 +17,6 @@ sudo apt install -y awscli \
                     hurl \
                     make \
                     ncat \
-                    nodejs \
-                    npm \
                     starship \
                     unzip \
                     zsh
@@ -32,17 +26,25 @@ curl -sSfL "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubu
 sudo dpkg -i session-manager-plugin.deb
 
 # npm
-sudo npm install --omit=dev @commitlint/cli @commitlint/config-conventional
-sudo npm install --omit=dev conventional-changelog
-sudo npm install --omit=dev lefthook
-sudo npm install --omit=dev markdownlint-cli
-sudo npm install --omit=dev prettier
-sudo npm install --omit=dev pyright
-sudo npm install --omit=dev shellcheck
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
+nvm install node
+npm install --omit=dev @commitlint/cli @commitlint/config-conventional
+npm install --omit=dev conventional-changelog
+npm install --omit=dev lefthook
+npm install --omit=dev markdownlint-cli
+npm install --omit=dev prettier
+npm install --omit=dev shellcheck
 
 # uv
 curl -sSfL https://astral.sh/uv/install.sh | sh
+~/.local/bin/uv tool install pyright
 ~/.local/bin/uv tool install ruff
+
+# terraform
+curl -sSfL https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_amd64.zip -o "terraform.zip"
+unzip terraform.zip terraform ~/.local/bin/
+chmod 544 ~/.local/bin/terraform
+rm terraform.zip
 
 #
 # Env config

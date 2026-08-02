@@ -11,6 +11,7 @@ echo "$(basename "$0") starting."
 [[ ! -d ~/.config ]] && mkdir -p ~/.config
 [[ ! -d ~/.local/bin ]] && mkdir -p ~/.local/bin
 [[ ! -d ~/backups ]] && mkdir -p ~/backups
+[[ ! -d ~/node_modules/.bin ]] && mkdir -p ~/node_modules/.bin
 [[ ! -d ~/tmp ]] && mkdir -p ~/tmp
 
 # Finished

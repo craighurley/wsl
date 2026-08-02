@@ -2,7 +2,7 @@
 
 ## Ubuntu
 
-To install Ubuntu in WSL, run the following command and follow the installation prompts:
+To install Ubuntu in WSL, run the following command in PowerShell and follow the installation prompts:
 
 ```
 wsl --install -d Ubuntu

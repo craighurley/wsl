@@ -15,10 +15,10 @@ cd ~
 git clone https://github.com/craighurley/wsl.git
 ```
 
-`cd` into the cloned repo and run the following scripts:
+Run the following scripts:
 
 ```
-directories.sh
-installs.sh
-dotfiles.sh
+~/wsl/directories.sh
+~/wsl/installs.sh
+~/wsl/dotfiles.sh
 ```

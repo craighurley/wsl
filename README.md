@@ -22,3 +22,12 @@ Run the following scripts:
 ~/wsl/installs.sh
 ~/wsl/dotfiles.sh
 ```
+
+The default timezone is UTC, you may want to change that to your region:
+
+```
+# for Melbourne:
+sudo timedatectl set-timezone Australia/Melbourne
+# or for Auckland:
+sudo timedatectl set-timezone Pacific/Auckland
+```

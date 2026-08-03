@@ -16,6 +16,7 @@ sudo apt install -y awscli \
                     direnv \
                     gitleaks \
                     hurl \
+                    jq \
                     make \
                     ncat \
                     starship \

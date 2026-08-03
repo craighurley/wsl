@@ -30,6 +30,7 @@ sudo apt install -y awscli \
 # aws cli session manager plugin
 curl -sSfL "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
 sudo dpkg -i session-manager-plugin.deb
+rm session-manager-plugin.deb
 
 # npm
 curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
@@ -64,6 +65,7 @@ rm terraform.zip
 #
 # Env config
 #
+echo "${SCRIPT_NAME} setting default shell to zsh..."
 chsh -s "$(which zsh)"
 
 echo "${SCRIPT_NAME} complete."

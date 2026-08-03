@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 SCRIPT_NAME="$(basename "$0")"
+NVM_VERSION="0.40.6"
+TERRAFORM_VERSION="1.15.8"
 
 echo "${SCRIPT_NAME} starting."
 
@@ -28,7 +30,7 @@ curl -sSfL "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubu
 sudo dpkg -i session-manager-plugin.deb
 
 # npm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
 nvm install node
 npm install --omit=dev @commitlint/cli @commitlint/config-conventional
 npm install --omit=dev @github/copilot
@@ -44,7 +46,7 @@ curl -sSfL https://astral.sh/uv/install.sh | sh
 ~/.local/bin/uv tool install ruff
 
 # terraform
-curl -sSfL https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_amd64.zip -o "terraform.zip"
+curl -sSfL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -o "terraform.zip"
 unzip terraform.zip terraform -d ~/.local/bin/
 chmod 544 ~/.local/bin/terraform
 rm terraform.zip

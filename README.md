@@ -2,7 +2,7 @@
 
 ## Ubuntu
 
-To install Ubuntu in WSL, run the following command in PowerShell and follow the installation prompts:
+To install Ubuntu in WSL, run the following command in _PowerShell_ and follow the installation prompts:
 
 ```
 wsl --install -d Ubuntu
@@ -50,3 +50,19 @@ Generate your SSH key:
 ```
 ssh-keygen -f ~/.ssh/$USER -C "$USER@$HOSTNAME"
 ```
+
+### Docker
+
+If you need to install docker, run this within WSL:
+
+```
+~/wsl/docker.sh
+```
+
+Once that completes successfully, shutdown WSL from _PowerShell_:
+
+```
+wsl --shutdown
+```
+
+Now open a new terminal for Ubuntu and Docker will be ready to use.

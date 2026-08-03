@@ -45,7 +45,7 @@ curl -sSfL https://astral.sh/uv/install.sh | sh
 
 # terraform
 curl -sSfL https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_amd64.zip -o "terraform.zip"
-unzip terraform.zip terraform ~/.local/bin/
+unzip terraform.zip terraform -d ~/.local/bin/
 chmod 544 ~/.local/bin/terraform
 rm terraform.zip
 

@@ -30,6 +30,7 @@ sudo dpkg -i session-manager-plugin.deb
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
 nvm install node
 npm install --omit=dev @commitlint/cli @commitlint/config-conventional
+npm install --omit=dev @github/copilot
 npm install --omit=dev conventional-changelog
 npm install --omit=dev lefthook
 npm install --omit=dev markdownlint-cli

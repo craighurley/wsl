@@ -33,7 +33,15 @@ sudo dpkg -i session-manager-plugin.deb
 
 # npm
 curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
+
+export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 nvm install node
+
 npm install --omit=dev @commitlint/cli @commitlint/config-conventional
 npm install --omit=dev @github/copilot
 npm install --omit=dev conventional-changelog

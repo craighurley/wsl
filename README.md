@@ -66,3 +66,8 @@ wsl --shutdown
 ```
 
 Now open a new terminal for Ubuntu and Docker will be ready to use.
+
+## Known issues
+
+- Timezone updates do not survive restart (e.g. in _PowerShell_: `wsl --shutdown`). Re-run `sudo timedatectl set-timezone REGION` to fix temporarily.
+- `ls` is not sorting correctly.

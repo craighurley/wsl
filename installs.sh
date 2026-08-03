@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 SCRIPT_NAME="$(basename "$0")"
 NVM_VERSION="0.40.6"
 TERRAFORM_VERSION="1.15.8"

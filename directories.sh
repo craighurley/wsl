@@ -13,6 +13,7 @@ echo "${SCRIPT_NAME} starting."
 [[ ! -d ~/.local/bin ]] && mkdir -p ~/.local/bin
 [[ ! -d ~/backups/dotfiles ]] && mkdir -p ~/backups/dotfiles
 [[ ! -d ~/node_modules/.bin ]] && mkdir -p ~/node_modules/.bin
+[[ ! -d ~/projects ]] && mkdir -p ~/projects
 [[ ! -d ~/tmp ]] && mkdir -p ~/tmp
 
 echo "${SCRIPT_NAME} complete."

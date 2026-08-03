@@ -23,15 +23,6 @@ Run the following scripts:
 ~/wsl/dotfiles.sh
 ```
 
-### git committer
-
-You'll need to update your git committer details:
-
-```
-cp ~/.gitconfig.custom.example ~/.gitconfig.custom
-# now edit your name and email address in ~/.gitconfig.custom
-```
-
 ### Timezone
 
 The default timezone is UTC, you may want to change that to your region:
@@ -41,4 +32,21 @@ The default timezone is UTC, you may want to change that to your region:
 sudo timedatectl set-timezone Australia/Melbourne
 # or for Auckland:
 sudo timedatectl set-timezone Pacific/Auckland
+```
+
+### git committer
+
+You'll need to update your git committer details:
+
+```
+cp ~/.gitconfig.custom.example ~/.gitconfig.custom
+# now edit your name and email address in ~/.gitconfig.custom
+```
+
+### SSH
+
+Generate your SSH key:
+
+```
+ssh-keygen -f ~/.ssh/$USER -C "$USER@$HOSTNAME"
 ```

@@ -18,6 +18,7 @@ sudo apt install -y awscli \
                     bzip2 \
                     diffr \
                     direnv \
+                    dnsutils \
                     gitleaks \
                     hurl \
                     jq \
